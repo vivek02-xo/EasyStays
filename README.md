@@ -1,1 +1,1 @@
-# StaySwap
+# EasyStays
