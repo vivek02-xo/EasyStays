@@ -33,14 +33,15 @@ app.get('/',(req, res) => {
 });
 
 const validateListing = (req, res, next) =>{
-    let {error } = listingSchema.validate(req.body);
+    let {error} = listingSchema.validate(req.body);
     if(error){
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400 , errMsg);
+        let errMssg = error.details.map(el => el.message).join(",");
+        throw new ExpressError(400, errMssg);
     }else{
         next();
     }
 }
+
 // Index Route 
 app.get("/listings" , wrapAsync(async (req, res) =>{
     const allListing = await Listing.find({});
@@ -60,21 +61,10 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 // create Route
-app.post("/listings", 
+app.post("/listings",validateListing, 
     wrapAsync(async (req, res) => {
-        if(!req.body.listing){
-            throw new ExpressError(400 , "Invalid Listing Data (Send Valid data for listing");
-        }
+        
         const newListing = new Listing(req.body.listing);
-        if(!newListing.title){
-            throw new ExpressError(400 , "Invalid Title!(valid Title is required)");
-        }
-        if(!newListing.description){
-            throw new ExpressError(400 , "Invalid description!(validn description is  required)");
-        }
-        if(!newListing.Location){
-            throw new ExpressError(400 , "Invalid Location!(valid Location is required)");
-        }
         await newListing.save();
         res.redirect("/listings");
     })
@@ -88,7 +78,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 }));
 
 // Update Route
-app.put("/listings/:id", wrapAsync(async (req, res) => {
+app.put("/listings/:id",validateListing, wrapAsync(async (req, res) => {
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect(`/listings/${id}`);
