@@ -20,11 +20,12 @@ Main().then(() => {
 async function Main(){
     await mongoose.connect(MONGO_URL);
 }
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.engine('ejs', ejsMate);
+
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/',(req, res) => {
@@ -34,7 +35,7 @@ app.get('/',(req, res) => {
 const validateListing = (req, res, next) =>{
     let {error } = listingSchema.validate(req.body);
     if(error){
-        let errMsg = error.details.map((el) => el.messgage).join(",");
+        let errMsg = error.details.map((el) => el.message).join(",");
         throw new ExpressError(400 , errMsg);
     }else{
         next();
@@ -110,9 +111,13 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
 //     res.send("Successfull testing");
 // });
 
+// This works in older verson of express.
 // app.all("*", (req, res , next) =>{
 //     next(new ExpressError(404, "Page Not Found!"));
 // });
+app.use((req, res, next) => {
+    next(new ExpressError(404, "Page Not Found!"));
+});
 
 app.use((err, req, res, next) =>{
     const { statusCode = 500, message = "Something went wrong" } = err;
@@ -123,3 +128,5 @@ app.use((err, req, res, next) =>{
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
 })
+
+

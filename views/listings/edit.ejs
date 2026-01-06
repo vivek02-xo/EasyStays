@@ -1,4 +1,4 @@
-<% layout("/layouts/boilerplate") %>
+<% layout("layouts/boilerplate") %>
 <br><br>
 <div class="row">
   <div class="col-8 offset-2">
@@ -16,12 +16,14 @@
       <label for="description"class="form-label">Description</label>
       <textarea name="listing[description]" class="form-control" required><%= listing.description %></textarea>
       <div class="invalid-feedback">Please enter a short description</div>
+      <div class="valid-feedback">looks good!</div>
     </div>
 
     <div class="mb-3">
       <label for="image"class="form-label">Image</label>
       <input name="listing[image]" value="<%= listing.image.url %>" type="text" class="form-control" required/>
       <div class="invalid-feedback">Image should be valid</div>
+      <div class="valid-feedback">looks good!</div>
     </div>
     <div class="row">
 
@@ -30,12 +32,14 @@
       <label for="price"class="form-label">Price</label>
       <input name="listing[price]" value="<%= listing.price %>" type="number" class="form-control" required/>
       <div class="invalid-feedback">Price should be valid</div>
+      <div class="valid-feedback">looks good!</div>
     </div>
 
     <div class="mb-3 col-md-8">
       <label for="country"class="form-label">Country</label>
       <input name="listing[location]" value="<%= listing.country %>" type="text" class="form-control" required/>
       <div class="invalid-feedback">Country should be valid</div>
+      <div class="valid-feedback">looks good!</div>
     </div>
     </div>
 
