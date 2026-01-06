@@ -1,9 +1,8 @@
 <%layout("layouts/boilerplate") %>
 
-<div class="row">
+<div class="row mt-3">
     <div class="alert-danger alert col-6 offset-3" role="alert">
-        A simple danger alert-check it out! 
-        <div class="error-message"><%=message %></div>
-        
+        <h4 class="alert-heading"><%=err.message %></h4> 
+        <!-- <p><%=err.stack%></p> -->
     </div>
 </div>

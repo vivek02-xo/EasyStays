@@ -62,12 +62,19 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 // create Route
 app.post("/listings", 
     wrapAsync(async (req, res) => {
-        const result = listingSchema.validate(req.body);
-        console.log(result);
-        if(result.error){
-            throw new ExpressError(400 , result.error);
+        if(!req.body.listing){
+            throw new ExpressError(400 , "Invalid Listing Data (Send Valid data for listing");
         }
         const newListing = new Listing(req.body.listing);
+        if(!newListing.title){
+            throw new ExpressError(400 , "Invalid Title!(valid Title is required)");
+        }
+        if(!newListing.description){
+            throw new ExpressError(400 , "Invalid description!(validn description is  required)");
+        }
+        if(!newListing.Location){
+            throw new ExpressError(400 , "Invalid Location!(valid Location is required)");
+        }
         await newListing.save();
         res.redirect("/listings");
     })
@@ -121,7 +128,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) =>{
     const { statusCode = 500, message = "Something went wrong" } = err;
-    res.status(statusCode).render("error.ejs" , {message});
+    res.status(statusCode).render("error.ejs" , {err});
     // res.status(statusCode).send(message);
 });
 
