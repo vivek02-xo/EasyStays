@@ -34,7 +34,6 @@ listingSchema.post("findOneAndDelete" , async function(listing){
   if(listing){
     await Review.deleteMany({_id: {$in: listing.reviews}});
   }
-  
 
 });
 
