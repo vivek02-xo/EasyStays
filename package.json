@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "22.13.0"
+  },
   "name": "stayswap",
   "version": "1.0.0",
   "main": "index.js",
@@ -10,8 +13,11 @@
   "license": "ISC",
   "description": "EasyStays is a **property rental and booking web app** inspired by Airbnb.  \r Users can explore listings, create their own, and manage stays with a simple, intuitive interface.",
   "dependencies": {
+    "cloudinary": "^1.41.3",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^6.0.0",
     "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
     "express": "^5.1.0",
@@ -19,9 +25,10 @@
     "joi": "^18.0.2",
     "method-override": "^3.0.0",
     "mongoose": "^8.18.1",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^9.0.1"
-  },
-  "devDependencies": {}
+  }
 }

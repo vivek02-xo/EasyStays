@@ -8,19 +8,12 @@ const listingSchema = new Schema({
         required: true,
     },
     description: String,
-    image: {
-    filename: {
-      type: String,
-      default: "listingimage",
-    },
-    url: {
-      type: String,
-      default:
-        "https://modernvillasco.com/wp-content/uploads/2024/05/designing-villa-7.jpg",
-    },
+  image: {
+    url: String,
+    filename: String,
   },
     price: Number,
-    Location: String,
+    location: String,
     country: String,
     reviews: [
       {

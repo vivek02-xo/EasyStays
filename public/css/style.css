@@ -4,9 +4,9 @@ body{
     min-height: 100vh !important;
 }
 .plus-jakarta-sans {
-  font-family: "Playfair Display", serif !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
   font-optical-sizing: auto !important;
-  font-weight: 700 !important;
+  font-weight: 500 !important;
   font-style: normal !important;
   
 }
@@ -87,7 +87,7 @@ body{
 
 .listing-link{
     text-decoration: none;
-    
+
 }
 
 /* card effect */
