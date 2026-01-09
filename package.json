@@ -8,7 +8,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "EasyStays is a **property rental and booking web app** inspired by Airbnb.  \r Users can explore listings, create their own, and manage stays with a simple, intuitive interface.",
   "dependencies": {
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.7",
@@ -22,5 +22,6 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^9.0.1"
-  }
+  },
+  "devDependencies": {}
 }
