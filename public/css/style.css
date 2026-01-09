@@ -1,12 +1,12 @@
-.body{
+body{
     display: flex !important;
     flex-direction: column !important;
     min-height: 100vh !important;
 }
 .plus-jakarta-sans {
-  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-family: "Playfair Display", serif !important;
   font-optical-sizing: auto !important;
-  font-weight: 400 !important;
+  font-weight: 700 !important;
   font-style: normal !important;
   
 }
