@@ -20,9 +20,9 @@ const listingRouter = require('./routes/listing');
 const reviewRouter = require('./routes/review');
 const userRouter = require('./routes/user');
 
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-const dbUrl = process.env.ATLASDB_URL;
-console.log("DB URL:", process.env.ATLASDB_URL);
+const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+// const dbUrl = process.env.ATLASDB_URL;
+// console.log("DB URL:", process.env.ATLASDB_URL);
 
 Main().then(() => {
     console.log('Connected to MongoDB');
@@ -31,7 +31,7 @@ Main().then(() => {
 })
 
 async function Main(){
-    await mongoose.connect(dbUrl);
+    await mongoose.connect(MONGO_URL);
 }
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -42,9 +42,9 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 const store = MongoStore.create({
-    mongoUrl: dbUrl,
+    mongoUrl: MONGO_URL,
     crypto:{
-        secret: process.env.SECRET,
+        secret: process.env.SECRET || "devsecret",
     },
     touchAfter: 24 * 3600,
 });
@@ -84,22 +84,15 @@ app.use((req, res, next) => {
 });
 
 
-// app.get('/',(req, res) => {
-//     res.render("listings/home.ejs");
-// });
-
-
+app.get('/',(req, res) => {
+    res.redirect("/listings")
+});
 
 app.use('/listings', listingRouter);
 app.use('/listings/:id/reviews', reviewRouter);
 app.use('/', userRouter);
 
 
-
-// This works in older verson of express.
-// app.all("*", (req, res , next) =>{
-//     next(new ExpressError(404, "Page Not Found!"));
-// });
 app.use((req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 });
@@ -107,11 +100,8 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) =>{
     const { statusCode = 500, message = "Something went wrong" } = err;
     res.status(statusCode).render("error.ejs" , {err});
-    // res.status(statusCode).send(message);
 });
 
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
-})
-
-
+});
